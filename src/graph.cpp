@@ -64,7 +64,7 @@ void Graph::addEdge(edge e) {
         backPosIn[e.w].emplace_back(edgesOut[e.v].size() - 1);
     } else {
         edgesOut[e.v].emplace_back(e);
-        edgesOut[e.w].emplace_back(e);
+        edgesOut[e.w].emplace_back(edge {e.w, e.v, e.weight});
         backPosOut[e.v].emplace_back(edgesOut[e.w].size() - 1);
         backPosOut[e.w].emplace_back(edgesOut[e.v].size() - 1);
     }
@@ -98,7 +98,7 @@ void Graph::deleteEdge(node v, node w) {
 
                 edgesOut[w][backPos] = edgesOut[w].back();
                 backPosOut[w][backPos] = backPosOut[w].back();
-                backPosOut[edgesOut[w][backPos].v][backPosOut[w][backPos]] = backPos;
+                backPosOut[edgesOut[w][backPos].w][backPosOut[w][backPos]] = backPos;
 
                 edgesOut[v].pop_back();
                 backPosOut[v].pop_back();
@@ -164,6 +164,12 @@ void Graph::deleteVertex(node v) {
         deleteEdge(v, edgesOut[v].back().w);
     }
 
+    if (directed) {
+        while (!edgesIn[v].empty()) {
+            deleteEdge(edgesIn[v].back().v, v);
+        }
+    }
+
     alive[v] = false;
     n--;
     openIDSlots.emplace_back(v);
@@ -193,7 +199,11 @@ bool Graph::hasVertex(node v) {
 }
 
 Graph::EdgeIterator Graph::getEdges() {
-    return EdgeIterator(*this, 0, 0);
+    return {*this, 0, 0};
+}
+
+Graph::NodeIterator Graph::getNodes() {
+    return {*this, 0};
 }
 
 std::vector<edge> &Graph::incidentEdges(node v) {
