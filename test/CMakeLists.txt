@@ -15,4 +15,6 @@ macro(package_add_test TESTNAME)
     set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
 endmacro()
 
-package_add_test(basic basic.cpp)
+package_add_test(basic basic.cpp
+    ../src/graph.cpp
+)
