@@ -14,6 +14,14 @@ using edgeWeight = double;
 struct edge {
     node v, w;
     edgeWeight weight;
+
+    friend bool operator==(const edge &a, const edge &b) {
+        return (a.v == b.v) && (a.w == b.w);
+    }
+
+    friend bool operator!=(const edge &a, const edge &b) {
+        return !((a.v == b.v) && (a.w == b.w));
+    }
 };
 
 #endif //ALGO_ENGINEERING_CPP_BASE_HPP
