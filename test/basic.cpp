@@ -36,8 +36,21 @@ TEST(ExampleTests, basicUndirectedGraphTest) {
     }
 }
 
-TEST(ExampleTests, graphCreationTest)
+TEST(ExampleTests, ValidTopsortCreationTest)
 {
-    std::vector<edge> edgelist = createValidTopSortInstance(5,3,1);
-
+    int n= 1000;
+    int targetEdgeNumber = 300;
+    int seed= 1;
+    std::vector<edge> edgelist = createValidTopSortInstance(n,targetEdgeNumber,seed);
+    EXPECT_LE(targetEdgeNumber*0.95,edgelist.size());
+    EXPECT_LE(edgelist.size(),targetEdgeNumber*1.05);
+}
+TEST(ExampleTests, InValidTopsortCreationTest)
+{
+    int n= 10000;
+    int targetEdgeNumber = 3000;
+    int seed= 1;
+    std::vector<edge> edgelist = createInvalidTopSortInstance(n,targetEdgeNumber,seed);
+    EXPECT_LE(targetEdgeNumber*0.95,edgelist.size());
+    EXPECT_LE(edgelist.size(),targetEdgeNumber*1.05);
 }

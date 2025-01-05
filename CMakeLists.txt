@@ -10,7 +10,6 @@ add_subdirectory(src)
 # executable
 add_executable(main
         src/main.cpp
-        include/graphgenerator.h
 )
 
 target_include_directories(main
