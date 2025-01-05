@@ -54,3 +54,12 @@ TEST(ExampleTests, InValidTopsortCreationTest)
     EXPECT_LE(targetEdgeNumber*0.95,edgelist.size());
     EXPECT_LE(edgelist.size(),targetEdgeNumber*1.05);
 }
+TEST(ExampleTests, ValidMSTCreationTest)
+{
+    int n= 10000;
+    int targetEdgeNumber = 3000;
+    int seed= 1;
+    std::vector<edge> edgelist = createInvalidTopSortInstance(n,targetEdgeNumber,seed);
+    EXPECT_LE(targetEdgeNumber*0.95,edgelist.size());
+    EXPECT_LE(edgelist.size(),targetEdgeNumber*1.05);
+}
