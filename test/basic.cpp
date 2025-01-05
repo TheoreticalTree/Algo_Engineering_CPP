@@ -18,6 +18,21 @@ TEST(ExampleTests, basicDirectedGraphTest) {
     g.addEdge({4,1,0.2});
     g.addEdge({0,3,1.2});
 
+    for (node v : g.getNodes()) {
+        std::cout << "Has node " << v << std::endl;
+    }
+
+    for (edge e : g.getEdges()) {
+        std::cout << "Edge from " << e.v << " to " << e.w << " with weight " << e.weight << std::endl;
+    }
+
+    g.deleteVertex(3);
+    g.deleteEdge(0,1);
+
+    for (node v : g.getNodes()) {
+        std::cout << "Has node " << v << std::endl;
+    }
+
     for (edge e : g.getEdges()) {
         std::cout << "Edge from " << e.v << " to " << e.w << " with weight " << e.weight << std::endl;
     }
@@ -27,9 +42,24 @@ TEST(ExampleTests, basicUndirectedGraphTest) {
     Graph g(5, false, true);
 
     g.addEdge({0,1,3.0});
-    g.addEdge({1,0,-1.5});
+    g.addEdge({2,1,-1.5});
     g.addEdge({4,1,0.2});
     g.addEdge({0,3,1.2});
+
+    for (node v : g.getNodes()) {
+        std::cout << "Has node " << v << std::endl;
+    }
+
+    for (edge e : g.getEdges()) {
+        std::cout << "Edge from " << e.v << " to " << e.w << " with weight " << e.weight << std::endl;
+    }
+
+    g.deleteVertex(3);
+    g.deleteEdge(0,1);
+
+    for (node v : g.getNodes()) {
+        std::cout << "Has node " << v << std::endl;
+    }
 
     for (edge e : g.getEdges()) {
         std::cout << "Edge from " << e.v << " to " << e.w << " with weight " << e.weight << std::endl;

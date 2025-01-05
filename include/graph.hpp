@@ -94,7 +94,11 @@ public:
         using pointer           = edge*;
         using reference         = edge&;
 
-        EdgeIterator(Graph& g, node v, count pos) : g(g), v(v), pos(pos) {};
+        EdgeIterator(Graph& g, node pv, count ppos) : g(g), v(pv), pos(ppos) {
+            while (v < g.aboveMaxNodeID && g.edgesOut[v].empty()) {
+                v++;
+            }
+        };
 
         EdgeIterator begin() {
             return {g, 0, 0};
@@ -167,7 +171,70 @@ public:
         count pos;
     };
 
+    struct NodeIterator {
+        using iterator_category = std::forward_iterator_tag;
+        using difference_type = std::ptrdiff_t;
+        using value_type        = node;
+        using pointer           = node*;
+        using reference         = node&;
+
+        NodeIterator(Graph& g, node pv) : g(g), v(pv) {
+            while (v < g.aboveMaxNodeID && !g.alive[v]) {
+                v++;
+            }
+        };
+
+        NodeIterator begin() {
+            return {g, 0};
+        }
+
+        NodeIterator end() {
+            return {g, g.aboveMaxNodeID};
+        }
+
+        value_type operator*() const {
+            return v;
+        }
+
+        pointer operator->() {
+            return &v;
+        }
+
+        NodeIterator& operator++() {
+            do {
+                v++;
+            } while (v < g.aboveMaxNodeID && !g.alive[v]);
+
+            return *this;
+        }
+
+        NodeIterator operator++(int) {
+            NodeIterator tmp = *this;
+
+            do {
+                v++;
+            } while (v < g.aboveMaxNodeID && !g.alive[v]);
+
+            return tmp;
+        }
+
+        friend bool operator==(const NodeIterator& a, const NodeIterator& b) {
+            return (&a.g == &b.g) && (a.v == b.v);
+        }
+
+        friend bool operator!=(const NodeIterator& a, const NodeIterator& b) {
+            return !((&a.g == &b.g) && (a.v == b.v));
+        }
+
+    private:
+        Graph& g;
+
+        node v;
+    };
+
     EdgeIterator getEdges();
+
+    NodeIterator getNodes();
 
 
 protected:
