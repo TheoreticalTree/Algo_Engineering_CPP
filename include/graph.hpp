@@ -253,7 +253,7 @@ protected:
     bool directed, weighted;
 
     //! Number of current nodes
-    count n;
+    count n=0;
     //! Highest NodeID currently in use plus 1
     count aboveMaxNodeID;
     //! Number of edges

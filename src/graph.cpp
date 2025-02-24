@@ -219,9 +219,9 @@ std::vector<edge> &Graph::incomingEdges(node v) {
 }
 count Graph::getNumberOfEdges()
 {
-    return n;
+    return m;
 }
 count  Graph::getNumberOfNodes()
 {
-    return m;
+    return n;
 }
