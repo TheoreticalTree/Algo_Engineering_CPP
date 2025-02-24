@@ -217,3 +217,11 @@ std::vector<edge> &Graph::outgoingEdges(node v) {
 std::vector<edge> &Graph::incomingEdges(node v) {
     return edgesIn[v];
 }
+count Graph::getNumberOfEdges()
+{
+    return n;
+}
+count  Graph::getNumberOfNodes()
+{
+    return m;
+}

@@ -87,6 +87,18 @@ public:
 
     std::vector<edge>& incomingEdges(node v);
 
+    /**
+     *
+     * @return current number of edges
+     */
+    count getNumberOfEdges();
+
+    /**
+     *
+     * @return currend number of nodes
+     */
+    count getNumberOfNodes();
+
     struct EdgeIterator {
         using iterator_category = std::forward_iterator_tag;
         using difference_type = std::ptrdiff_t;
