@@ -16,5 +16,12 @@ macro(package_add_test TESTNAME)
 endmacro()
 
 package_add_test(basic basic.cpp
-    ../src/graph.cpp
+        ../src/graph.cpp
+)
+
+package_add_test(topsort topsort_test.cpp
+        ../src/graph.cpp
+        ../include/abstract_algorithm.hpp
+        ../src/topsort/basic_topsort.cpp
+        ../src/topsort/topsort_checker.cpp
 )
