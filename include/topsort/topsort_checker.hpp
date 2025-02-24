@@ -10,21 +10,22 @@
 
 class TopSortChecker : public AbstractAlgorithm {
     public:
-        explicit TopSortChecker(Graph &g, std::vector<node> &certificate): AbstractAlgorithm(g)
+        explicit TopSortChecker(Graph& g, std::vector<node> &certificate): AbstractAlgorithm(g)
         {
             certificate_=certificate;
             initialize();
         }
-        void initialize();
-        virtual void run() override;
+        void run() override;
         //virtual bool hasRun() const override{ return hasRun_;}
         bool certificateIsCorrect() const;
-        virtual std::vector<node> getResult() const override;
-        virtual std::map<std::string, std::variant<double, unsigned long>> getStats() const override;
+        std::map<std::string, std::variant<double, unsigned long>> getStats() const override;
 
 private:
     std::vector<node> certificate_;
     bool certificateIsCorrect_=false;
+
+
+    void initialize();
 
 };
 

@@ -17,14 +17,13 @@ public:
     {
 
     };
+    virtual ~AbstractAlgorithm() = default;
 
-    virtual void run() = 0;
+    virtual void run()=0;
 
     virtual bool hasRun() const { return hasRun_; }
 
-    virtual std::vector<node> getResult() const;
-
-    virtual std::map<std::string, std::variant<double, unsigned long>> getStats() const;
+    virtual std::map<std::string, std::variant<double, unsigned long>> getStats() const=0;
 
 protected:
     Graph& graph_;

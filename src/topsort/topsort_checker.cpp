@@ -56,9 +56,5 @@ std::map<std::string, std::variant<double, unsigned long>> TopSortChecker::getSt
             {"Hier könnten Ihre Stats stehen", 0.0}
     };
 }
-std::vector<node> TopSortChecker::getResult() const
-{
-    return {};
-}
 
 
