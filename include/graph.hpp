@@ -81,12 +81,16 @@ public:
      */
     bool hasVertex(node v);
 
+    //! Number of edges (x, v), in undirected case equal to degree
     count degreeIn(node v);
 
+    //! Only for undirected graphs: Returns iterable over incident edges
     std::vector<edge>& incidentEdges(node v);
 
+    //! Number of edges (v, x), in undirected case equal to degree
     count degreeOut(node v);
 
+    //!
     std::vector<edge>& outgoingEdges(node v);
 
     count degree(node v);

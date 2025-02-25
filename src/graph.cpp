@@ -33,7 +33,7 @@ Graph::Graph(std::vector<edge> edges, bool directed, bool weighted) : directed(d
     }
 }
 
-Graph::Graph(count n, bool directed, bool weighted) : directed(directed), weighted(weighted) {
+Graph::Graph(count n, bool directed, bool weighted) : directed(directed), weighted(weighted), n(n) {
     aboveMaxNodeID = n;
 
     edgesOut.resize(n);
