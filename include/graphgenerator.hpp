@@ -9,6 +9,7 @@
 #include <random>
 #include <stdexcept>
 #include <vector>
+#include <algorithm>
 
 std::vector<edge> createValidTopSortInstance(int n, int targetEdgeNumber, int seed)
 {
@@ -90,7 +91,7 @@ std::vector<edge> createInvalidTopSortInstance(int n, int targetEdgeNumber, int 
         for (int j = i+1; j < n; j++)
         {
             random = rand() / double(RAND_MAX);
-            if (random <= edgeRatio && (find(edgelist.begin(), edgelist.begin()+circlesize+1, edge(nodes[i],nodes[j],1))==edgelist.begin()+circlesize+1) && (find(edgelist.begin(), edgelist.begin()+(circlesize+1), edge(nodes[j],nodes[i],1)))==edgelist.begin()+(circlesize+1))
+            if (random <= edgeRatio && (std::find(edgelist.begin(), edgelist.begin()+circlesize+1, edge(nodes[i],nodes[j],1))==edgelist.begin()+circlesize+1) && (find(edgelist.begin(), edgelist.begin()+(circlesize+1), edge(nodes[j],nodes[i],1)))==edgelist.begin()+(circlesize+1))
             {
                 edgelist.push_back(edge(nodes[i],nodes[j],1));
             }
