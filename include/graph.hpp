@@ -22,7 +22,7 @@ public:
      * @param directed true if the graph is directed, false otherwise (default false)
      * @param weighted true if the graph is weighted, false otherwise (default false)
      */
-    Graph(std::string fileName, bool directed = false, bool weighted = false);
+    explicit Graph(std::string fileName, bool directed = false, bool weighted = false);
 
     /**
      * Constructs a graph from an existing edge list.
@@ -30,7 +30,7 @@ public:
      * @param directed true if the graph is directed, false otherwise (default false)
      * @param weighted true if the graph is weighted, false otherwise (default false)
      */
-    Graph(std::vector<edge> edges, bool directed = false, bool weighted = false);
+    explicit Graph(std::vector<edge> edges, bool directed = false, bool weighted = false);
 
     /**
      * Builds a graph with n vertices and no edges
@@ -38,7 +38,19 @@ public:
      * @param directed true if the graph is directed, false otherwise (default false)
      * @param weighted true if the graph is weighted, false otherwise (default false)
      */
-    Graph(count n,  bool directed = false, bool weighted = false);
+    explicit Graph(count n,  bool directed = false, bool weighted = false);
+
+    //! Returns if the graph is marked as weighted
+    [[nodiscard]] bool isWeighted() const
+    {
+        return weighted;
+    }
+
+    //! Returns if the graph is marked as directed
+    [[nodiscard]] bool isDirected() const
+    {
+        return directed;
+    }
 
     /**
      * Adds an edge to the graph. If such an edge already exists an error is thrown in debug mode, in release things may just go bad
@@ -60,7 +72,7 @@ public:
      * @param w
      * @return true of the edge exists, false otherwise
      */
-    bool hasEdge(node v, node w);
+    [[nodiscard]] bool hasEdge(node v, node w) const;
 
     /**
      * Adds a new vertex
@@ -82,32 +94,32 @@ public:
     bool hasVertex(node v);
 
     //! Number of edges (x, v), in undirected case equal to degree
-    count degreeIn(node v);
+    [[nodiscard]] count degreeIn(node v) const;
 
     //! Only for undirected graphs: Returns iterable over incident edges
-    std::vector<edge>& incidentEdges(node v);
+    [[nodiscard]] const std::vector<edge>& incidentEdges(node v) const;
 
     //! Number of edges (v, x), in undirected case equal to degree
-    count degreeOut(node v);
+    [[nodiscard]] count degreeOut(node v) const;
 
     //!
-    std::vector<edge>& outgoingEdges(node v);
+    [[nodiscard]] const std::vector<edge>& outgoingEdges(node v) const;
 
-    count degree(node v);
+    [[nodiscard]] count degree(node v) const;
 
-    std::vector<edge>& incomingEdges(node v);
+    [[nodiscard]] const std::vector<edge>& incomingEdges(node v) const;
 
     /**
      *
      * @return current number of edges
      */
-    count getNumberOfEdges();
+    [[nodiscard]] count getNumberOfEdges() const;
 
     /**
      *
      * @return currend number of nodes
      */
-    count getNumberOfNodes();
+    [[nodiscard]] count getNumberOfNodes() const;
 
     struct EdgeIterator {
         using iterator_category = std::forward_iterator_tag;
