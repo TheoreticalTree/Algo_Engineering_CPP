@@ -51,4 +51,16 @@ std::vector<edge> readDimacsFormat(const std::string& path)
     file.close();
     return edgelist;
 }
+bool writeEdgeListToDimacsFormat(const std::string& path, std::string instanceName, std::vector<edge>& edgelist)
+{
+    std::ofstream outfile;
+    outfile.open(path, std::ios::trunc);
+    outfile << instanceName <<"\n";
+    for (edge currentEdge : edgelist)
+    {
+        outfile << "a "<< currentEdge.v<<" "<< currentEdge.w<<" "<< currentEdge.weight <<"\n";
+    }
+    outfile.close();
+    return true;
+}
 #endif //IO_HPP

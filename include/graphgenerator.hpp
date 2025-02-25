@@ -13,7 +13,7 @@
 
 std::vector<edge> createValidTopSortInstance(int n, int targetEdgeNumber, int seed)
 {
-    int maxEdgeNumber = n * (n-1)/2;
+    uint64_t maxEdgeNumber = n * (n-1)/2;
     if (targetEdgeNumber>maxEdgeNumber)
     {
         throw std::runtime_error("Number of edges is too high. For n = " + std::to_string(n) + " select at most " + std::to_string(maxEdgeNumber) + " edges!\n");
@@ -48,7 +48,7 @@ std::vector<edge> createValidTopSortInstance(int n, int targetEdgeNumber, int se
 }
 std::vector<edge> createInvalidTopSortInstance(int n, int targetEdgeNumber, int seed)
 {
-    int maxEdgeNumber = n * (n-1)/2;
+    uint64_t maxEdgeNumber = n * (n-1)/2;
     if (targetEdgeNumber>maxEdgeNumber)
     {
         throw std::runtime_error("Number of edges is too high. For n =" + std::to_string(n)
