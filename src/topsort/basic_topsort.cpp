@@ -7,15 +7,17 @@
 
 void BasicTopsort::initialize()
 {
-    result_ = std::vector<node>(0);
-    zeroBucket_ = std::vector<node>(0);
-    incomingEdgeCount_ = std::vector<int>(graph_.getNumberOfNodes());
+    stillExistingNodes_ = graph_.getNumberOfNodes();
+    result_ = std::vector<node>(stillExistingNodes_,-1);
+    nextZeroBucket_ = std::vector<node>(0);
+    incomingDegree_ = std::vector<int>(stillExistingNodes_,0);
+    k_=0;
     for (node v : graph_.getNodes())
     {
-        incomingEdgeCount_[v] = graph_.incomingEdges(v).size();
-        if (incomingEdgeCount_[v]==0)
+        incomingDegree_[v] = graph_.degreeIn(v);
+        if (incomingDegree_[v]==0)
         {
-            zeroBucket_.push_back(v);
+            nextZeroBucket_.push_back(v);
         }
     }
 }
@@ -25,30 +27,39 @@ void BasicTopsort::run()
 {
     node currentNode;
     int incomingDegree;
-    while (graph_.getNumberOfNodes()!=0)
+    std::vector<node> currentZeroBucket;
+    while (stillExistingNodes_!=0)
     {
+        k_++;
         // there is a circle within the graph!
-        if (zeroBucket_.empty())
+        if (nextZeroBucket_.empty())
         {
             //Todo handle circle
+            k_=-1;
             result_.clear();
+            hasRun_=true;
             return;
         }else{
-            currentNode = zeroBucket_.back();
-            zeroBucket_.pop_back();
-            result_.push_back(currentNode);
-            for (edge currentEdge : graph_.outgoingEdges(currentNode))
+            std::swap(currentZeroBucket, nextZeroBucket_);
+            while (!currentZeroBucket.empty())
             {
-                incomingDegree = incomingEdgeCount_[currentEdge.w];
-                if (incomingDegree==1)
+                currentNode = currentZeroBucket.back();
+                currentZeroBucket.pop_back();
+                result_[currentNode]=k_;
+                for (edge currentEdge : graph_.outgoingEdges(currentNode))
                 {
-                    zeroBucket_.push_back(currentEdge.w);
+                    incomingDegree = incomingDegree_[currentEdge.w];
+                    if (incomingDegree==1)
+                    {
+                        nextZeroBucket_.push_back(currentEdge.w);
+                    }
+                    incomingDegree_[currentEdge.w] = incomingDegree_[currentEdge.w]-1;
                 }
-                incomingEdgeCount_[currentEdge.w] = incomingEdgeCount_[currentEdge.w]-1;
+                stillExistingNodes_--;
             }
-            graph_.deleteVertex(currentNode);
         }
     }
+    hasRun_=true;
     return;
 }
 
@@ -58,10 +69,22 @@ std::vector<node> BasicTopsort::getResult() const
     {
         return result_;
     }else{
-        std::printf("There are no results yet: Start the Algorithm First");
+       throw std::runtime_error("There are no results yet: Run the Algorithm First");
         return {};
     }
 }
+int BasicTopsort::getK() const
+{
+    if (hasRun_)
+    {
+        return k_;
+    }else
+    {
+        throw std::runtime_error("There are no results yet: Run the Algorithm First");
+        return -1;
+    }
+}
+
 
 
 std::map<std::string, std::variant<double, unsigned long>> BasicTopsort::getStats() const

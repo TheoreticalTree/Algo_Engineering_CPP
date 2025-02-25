@@ -25,12 +25,14 @@ public:
 
     //returns an empty vector if graph contains a cycle
     std::vector<node> getResult() const;
+    int getK() const;
 
-protected:
-   std::vector<node> result_;
 private:
-    std::vector<int> incomingEdgeCount_;
-    std::vector<node> zeroBucket_;
+    std::vector<node> result_;
+    int k_;
+    std::vector<int> incomingDegree_;
+    std::vector<node> nextZeroBucket_;
+    int stillExistingNodes_;
 
     void initialize();
 

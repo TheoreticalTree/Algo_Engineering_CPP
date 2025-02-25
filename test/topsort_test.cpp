@@ -3,8 +3,75 @@
 
 #include <gtest/gtest.h>
 #include <graphgenerator.hpp>
-#include "graph.hpp"
+#include <topsort/basic_topsort.hpp>
 
-TEST(ExampleTests, reallyBasicTest) {
+#include "graph.hpp"
+TEST(ExampleTests, reallyBasicTest)
+{
     EXPECT_EQ(1, 1);
+}
+
+TEST(ExampleTests, LineTest)
+{
+    Graph g(3, true, false);
+    g.addEdge({2, 1});
+    g.addEdge({1, 0});
+    BasicTopsort basic_topsort = BasicTopsort(g);
+    basic_topsort.run();
+    std::vector<node> result = basic_topsort.getResult();
+    EXPECT_EQ(basic_topsort.getK(),3);
+    EXPECT_EQ(result[0], 3);
+    EXPECT_EQ(result[1], 2);
+    EXPECT_EQ(result[2], 1);
+}
+
+TEST(ExampleTests, CircleTest)
+{
+    Graph g(3, true, false);
+    g.addEdge({0, 1});
+    g.addEdge({1, 2});
+    g.addEdge({2,0});
+    BasicTopsort basic_topsort = BasicTopsort(g);
+    basic_topsort.run();
+    std::vector<node> result = basic_topsort.getResult();
+    EXPECT_EQ(basic_topsort.getK(),-1);
+    EXPECT_TRUE(result.empty());
+}
+
+TEST(ExampleTests, NoRunYet)
+{
+    Graph g(3,true, false);
+    g.addEdge({0, 1});
+    g.addEdge({1, 2});
+    g.addEdge({2,0});
+    BasicTopsort basic_topsort = BasicTopsort(g);
+    EXPECT_THROW(basic_topsort.getResult(),std::runtime_error);
+    EXPECT_THROW(basic_topsort.getK(), std::runtime_error);
+}
+TEST(ExampleTests, SeveralPredecessors)
+{
+    Graph g(7, true, false);
+    g.addEdge({0,1});
+    g.addEdge({0,2});
+    g.addEdge({1,2});
+    g.addEdge({1,3});
+    g.addEdge({1,4});
+    g.addEdge({1,5});
+    g.addEdge({2,3});
+    g.addEdge({2,4});
+    g.addEdge({2,6});
+    g.addEdge({3,6});
+    g.addEdge({5,6});
+    g.addEdge({6,4});
+    BasicTopsort basic_topsort = BasicTopsort(g);
+    basic_topsort.run();
+    std::vector<node> result = basic_topsort.getResult();
+    EXPECT_EQ(basic_topsort.getK(), 6);
+    EXPECT_EQ(result[0],1);
+    EXPECT_EQ(result[1],2);
+    EXPECT_EQ(result[2],3);
+    EXPECT_EQ(result[3],4);
+    EXPECT_EQ(result[4],6);
+    EXPECT_EQ(result[5],3);
+    EXPECT_EQ(result[6],5);
 }
