@@ -5,8 +5,6 @@
 #include <graphgenerator.hpp>
 #include "graph.hpp"
 
-
-
 TEST(ExampleTests, reallyBasicTest) {
     EXPECT_EQ(1, 1);
 }

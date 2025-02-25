@@ -81,9 +81,15 @@ public:
      */
     bool hasVertex(node v);
 
+    count degreeIn(node v);
+
     std::vector<edge>& incidentEdges(node v);
 
+    count degreeOut(node v);
+
     std::vector<edge>& outgoingEdges(node v);
+
+    count degree(node v);
 
     std::vector<edge>& incomingEdges(node v);
 

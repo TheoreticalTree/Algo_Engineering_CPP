@@ -12,6 +12,7 @@ add_executable(main
         src/main.cpp
         src/topsort/topsort_checker.cpp
         src/topsort/basic_topsort.cpp
+        src/graph.cpp
 )
 
 target_include_directories(main

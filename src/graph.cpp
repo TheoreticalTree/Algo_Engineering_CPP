@@ -206,6 +206,24 @@ Graph::NodeIterator Graph::getNodes() {
     return {*this, 0};
 }
 
+count Graph::degreeIn(node v) {
+    if (directed)
+        return edgesIn[v].size();
+    else
+        return edgesOut.size();
+}
+
+count Graph::degreeOut(node v) {
+    return edgesOut[v].size();
+}
+
+count Graph::degree(node v) {
+    if (directed)
+        return edgesIn[v].size() + edgesOut[v].size();
+    else
+        return edgesOut[v].size();
+}
+
 std::vector<edge> &Graph::incidentEdges(node v) {
     return edgesOut[v];
 }
