@@ -4,36 +4,35 @@
 
 #include "topsort/topsort_checker.hpp"
 
-void TopSortChecker::initialize()
-{
-
-}
-
 void TopSortChecker::run()
 {
-    if (certificate_.empty())
+    if (proposedResult_.empty()||proposedK_==-1)
     {
-        //run basic topsort to check for circles
-        BasicTopsort basic_topsort = BasicTopsort(graph_);
-        basic_topsort.run();
-        if (basic_topsort.getResult().empty())
+        if (proposedResult_.empty()&&proposedK_==-1)
         {
-            certificateIsCorrect_= true;
-        }
-    }else
-    {
-        for (node currentNode : certificate_)
-        {
-            if (graph_.incomingEdges(currentNode).empty())
+            //run basic topsort to check for circles
+            BasicTopsort basic_topsort = BasicTopsort(graph_);
+            basic_topsort.run();
+            if (basic_topsort.getK()==-1)
             {
-                graph_.deleteVertex(currentNode);
-            }else{
-                //Todo: Errormessages? Do we give back the Conflicts?
-                hasRun_ = true;
+                proposedResultIsCorrect_= true;
+            }
+        }
+    }else{
+        for (edge currentEdge : graph_.getEdges())
+        {
+            if (proposedResult_[currentEdge.v]>= proposedResult_[currentEdge.w])
+            {
+                hasRun_=true;
                 return;
             }
         }
-        certificateIsCorrect_=true;
+        BasicTopsort basic_topsort = BasicTopsort(graph_);
+        basic_topsort.run();
+        if (basic_topsort.getK()==proposedK_)
+        {
+            proposedResultIsCorrect_=true;
+        }
     }
     hasRun_=true;
     return;
@@ -43,10 +42,9 @@ bool TopSortChecker::certificateIsCorrect() const
 {
  if (hasRun())
  {
-     return certificateIsCorrect_;
+     return proposedResultIsCorrect_;
  }else{
-     std::printf("You need to run the algorithm first");
-     return false;
+     throw std::runtime_error("You need to run the algorithm first");
  }
 }
 
