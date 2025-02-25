@@ -113,7 +113,7 @@ void Graph::deleteEdge(node v, node w) {
     throw std::runtime_error("You tried to delete an edge that does not exist");
 }
 
-bool Graph::hasEdge(node v, node w) {
+bool Graph::hasEdge(node v, node w) const {
     if (v > aboveMaxNodeID || w > aboveMaxNodeID || !alive[v] || !alive[w]) {
         throw std::runtime_error("Checked if an edge exists for which at least one endpoint does not exist");
     }
@@ -206,40 +206,40 @@ Graph::NodeIterator Graph::getNodes() {
     return {*this, 0};
 }
 
-count Graph::degreeIn(node v) {
+count Graph::degreeIn(node v) const {
     if (directed)
         return edgesIn[v].size();
     else
         return edgesOut.size();
 }
 
-count Graph::degreeOut(node v) {
+count Graph::degreeOut(node v) const {
     return edgesOut[v].size();
 }
 
-count Graph::degree(node v) {
+count Graph::degree(node v) const {
     if (directed)
         return edgesIn[v].size() + edgesOut[v].size();
     else
         return edgesOut[v].size();
 }
 
-std::vector<edge> &Graph::incidentEdges(node v) {
+const std::vector<edge> &Graph::incidentEdges(node v) const {
     return edgesOut[v];
 }
 
-std::vector<edge> &Graph::outgoingEdges(node v) {
+const std::vector<edge> &Graph::outgoingEdges(node v) const {
     return edgesOut[v];
 }
 
-std::vector<edge> &Graph::incomingEdges(node v) {
+const std::vector<edge> &Graph::incomingEdges(node v) const {
     return edgesIn[v];
 }
-count Graph::getNumberOfEdges()
+count Graph::getNumberOfEdges() const
 {
     return m;
 }
-count  Graph::getNumberOfNodes()
+count  Graph::getNumberOfNodes() const
 {
     return n;
 }
