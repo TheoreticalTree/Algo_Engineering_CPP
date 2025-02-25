@@ -105,7 +105,7 @@ bool largeTopsortInstanceGenerator()
     std::string instancename;
 
     std::filesystem::create_directory("../data/topsort/large");
-    for (int i = 1; i < 6; ++i)
+    for (int i = 1; i < 3; ++i)
     {
         path.append("../data/topsort/large/LargeValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidTopSortInstance(100000, 1000000, i);
