@@ -2,6 +2,8 @@
 #include <graphgenerator.hpp>
 
 #include <iostream>
+#include <topsort/basic_topsort.hpp>
+#include <topsort/topsort_checker.hpp>
 
 #include "graph.hpp"
 
@@ -74,6 +76,13 @@ TEST(ExampleTests, ValidTopsortCreationTest)
     std::vector<edge> edgelist = createValidTopSortInstance(n,targetEdgeNumber,seed);
     EXPECT_LE(targetEdgeNumber*0.95,edgelist.size());
     EXPECT_LE(edgelist.size(),targetEdgeNumber*1.05);
+    Graph g(edgelist);
+    BasicTopsort basic_topsort = BasicTopsort(g);
+    basic_topsort.run();
+    TopSortChecker top_sort_checker = TopSortChecker(g, basic_topsort.getResult(), basic_topsort.getK());
+    top_sort_checker.run();
+    EXPECT_TRUE(top_sort_checker.certificateIsCorrect());
+
 }
 TEST(ExampleTests, InValidTopsortCreationTest)
 {
@@ -83,6 +92,14 @@ TEST(ExampleTests, InValidTopsortCreationTest)
     std::vector<edge> edgelist = createInvalidTopSortInstance(n,targetEdgeNumber,seed);
     EXPECT_LE(targetEdgeNumber*0.95,edgelist.size());
     EXPECT_LE(edgelist.size(),targetEdgeNumber*1.05);
+    Graph g(edgelist);
+    BasicTopsort basic_topsort = BasicTopsort(g);
+    basic_topsort.run();
+    TopSortChecker top_sort_checker = TopSortChecker(g, basic_topsort.getResult(), basic_topsort.getK());
+    top_sort_checker.run();
+    EXPECT_TRUE(top_sort_checker.certificateIsCorrect());
+    EXPECT_EQ(basic_topsort.getK(),-1);
+    EXPECT_TRUE(basic_topsort.getResult().empty());
 }
 TEST(ExampleTests, ValidMSTCreationTest)
 {
