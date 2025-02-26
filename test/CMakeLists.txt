@@ -28,3 +28,9 @@ package_add_test(topsort topsort_test.cpp
         ../src/topsort/basic_topsort.cpp
         ../src/topsort/topsort_checker.cpp
 )
+package_add_test(mst mst_test.cpp
+        ../src/graph.cpp
+        ../include/abstract_algorithm.hpp
+        ../src/mst/basic_mst.cpp
+        ../src/mst/mst_checker.cpp
+)
