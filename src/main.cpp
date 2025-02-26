@@ -2,11 +2,18 @@
 // Created by michaelk on 05.01.25.
 //
 
-#include <graphgenerator.hpp>
+#include <graph.hpp>
 #include <iostream>
-#include <io.hpp>
+#include <topsort/basic_topsort.hpp>
+
+#include "../data/topsort/topsort_instance_generator.hpp"
 
 int main(int argc, char** argv) {
     std::cout << "Hello World!" << std::endl;
-    createValidTopSortInstance(100000, 2000000, 123456);
+
+    std::vector<edge> edgelist = readDimacsFormat("../data/topsort/tiny/TinyInvalid1.txt");
+    Graph g(edgelist,true, false);
+    BasicTopsort basic_topsort = BasicTopsort(g);
+    basic_topsort.run();
+    std::cout << basic_topsort.getK();
 }
