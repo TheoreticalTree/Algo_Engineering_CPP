@@ -4,11 +4,13 @@
 
 #ifndef IO_HPP
 #define IO_HPP
+
+
 #include <fstream>
 #include <vector>
 #include "base.hpp"
 
-std::vector<std::string> split(const std::string& s, const std::string& delimiter)
+inline std::vector<std::string> split(const std::string& s, const std::string& delimiter)
 {
     size_t postStart = 0;
     size_t posEnd;
@@ -29,7 +31,7 @@ std::vector<std::string> split(const std::string& s, const std::string& delimite
     return res;
 }
 
-std::vector<edge> readDimacsFormat(const std::string& path)
+inline std::vector<edge> readDimacsFormat(const std::string& path)
 {
     std::ifstream file;
     std::string line;
@@ -51,7 +53,8 @@ std::vector<edge> readDimacsFormat(const std::string& path)
     file.close();
     return edgelist;
 }
-bool writeEdgeListToDimacsFormat(const std::string& path, std::string instanceName, std::vector<edge>& edgelist)
+
+inline bool writeEdgeListToDimacsFormat(const std::string& path, std::string instanceName, std::vector<edge>& edgelist)
 {
     std::ofstream outfile;
     outfile.open(path, std::ios::trunc);

@@ -9,6 +9,8 @@
 #include "../data/topsort/topsort_instance_generator.hpp"
 
 int main(int argc, char** argv) {
+    topsortInstanceGenerator();
+
     std::cout << "Hello World!" << std::endl;
 
     std::vector<edge> edgelist = readDimacsFormat("../data/topsort/tiny/TinyInvalid1.txt");
