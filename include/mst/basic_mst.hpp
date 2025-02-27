@@ -29,7 +29,15 @@ public:
 
 private:
     std::vector<edge> result_;
-    double mstValue_;
+    double mstValue_=0;
+    std::vector<node> parent_;
+    std::vector<edge> sortedEdges_;
+    //the number is only correct for the roots, because im lazy
+    std::vector<u_int32_t> sizeOfSubtree_;
+    node findRoot(node v);
+    void setParentToRoot(node root, std::vector<node>& ancestors);
+    static bool firstEdgeWeightIsLargerThanSecond(edge& first, edge& second);
+
     void initialize();
 };
 
