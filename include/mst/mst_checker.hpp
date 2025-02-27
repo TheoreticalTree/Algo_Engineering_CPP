@@ -11,21 +11,22 @@
 class MSTChecker : public AbstractAlgorithm
 {
 public:
-    explicit MSTChecker(Graph& g, std::vector<edge>& proposedMST, double proposedMSTValue): AbstractAlgorithm(g)
+    explicit MSTChecker(Graph& g, std::vector<edge>& proposedMST, double proposedMSTValue): AbstractAlgorithm(g),
+        proposedMST_(proposedMST)
     {
-        proposedMST_ = proposedMST;
-        proposedMSTValue_=proposedMSTValue;
+        proposedMSTValue_ = proposedMSTValue;
     }
-
     void run() override;
     //virtual bool hasRun() const override{ return hasRun_;}
     bool proposedMSTIsCorrect() const;
     std::map<std::string, std::variant<double, unsigned long>> getStats() const override;
 
 private:
-    std::vector<edge> proposedMST_;
+
+    Graph proposedMST_;
     bool proposedMSTIsCorrect_ = false;
     double proposedMSTValue_;
+    bool largerEdgeInMSTExists(edge mstEdge) const;
 };
 
 
