@@ -277,7 +277,7 @@ protected:
     //! Number of current nodes
     count n=0;
     //! Highest NodeID currently in use plus 1
-    count aboveMaxNodeID;
+    count aboveMaxNodeID = 0;
     //! Number of edges
     count m = 0;
 

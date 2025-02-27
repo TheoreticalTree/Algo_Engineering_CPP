@@ -12,7 +12,13 @@ int main(int argc, char** argv) {
     std::cout << "Hello World!" << std::endl;
 
     std::vector<edge> edgelist = readDimacsFormat("../data/topsort/tiny/TinyInvalid1.txt");
+
+    std::cout << "EdgeList size: " << edgelist.size() << std::endl;
+
     Graph g(edgelist,true, false);
+
+    std::cout << "Graph has been build" << std::endl;
+    
     BasicTopsort basic_topsort = BasicTopsort(g);
     basic_topsort.run();
     std::cout << basic_topsort.getK();
