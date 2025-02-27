@@ -2,8 +2,8 @@
 // Created by kathy on 25.02.25.
 //
 
-#ifndef INSTANCE_GENERATOR_HPP
-#define INSTANCE_GENERATOR_HPP
+#ifndef TOPSORT_INSTANCE_GENERATOR_HPP
+#define TOPSORT_INSTANCE_GENERATOR_HPP
 #include <graphgenerator.hpp>
 #include <io.hpp>
 #include <filesystem>
@@ -137,4 +137,4 @@ bool topsortInstanceGenerator()
 }
 
 
-#endif //INSTANCE_GENERATOR_HPP
+#endif //TOPSORT_INSTANCE_GENERATOR_HPP
