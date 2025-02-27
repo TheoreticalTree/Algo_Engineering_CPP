@@ -6,8 +6,32 @@
 #include <stdexcept>
 #include <cassert>
 
+#include "io.hpp"
+
 Graph::Graph(std::string fileName, bool directed, bool weighted) : directed(directed), weighted(weighted) {
-    // TODO: implement
+    std::vector<edge> edges = readDimacsFormat("../data/topsort/tiny/TinyInvalid1.txt");
+
+
+    for (edge e : edges) {
+        aboveMaxNodeID = std::max(std::max(aboveMaxNodeID, e.v), e.w);
+    }
+
+    aboveMaxNodeID++;
+
+    n = aboveMaxNodeID;
+
+    edgesOut.resize(n);
+    backPosOut.resize(n);
+    alive.resize(n, true);
+
+    if (directed) {
+        edgesIn.resize(n);
+        backPosIn.resize(n);
+    }
+
+    for (edge e : edges) {
+        addEdge(e);
+    }
 }
 
 Graph::Graph(std::vector<edge> edges, bool directed, bool weighted) : directed(directed), weighted(weighted) {
