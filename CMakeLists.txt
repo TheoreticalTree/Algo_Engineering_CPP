@@ -15,6 +15,7 @@ add_executable(main
         src/graph.cpp
         src/mst/basic_mst.cpp
         src/mst/mst_checker.cpp
+        data/mst/mst_instance_generator.hpp
 )
 
 target_include_directories(main

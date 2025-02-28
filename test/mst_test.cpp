@@ -104,7 +104,7 @@ TEST(MSTTests, CertificateInvalid)
 
 }
 
-TEST(TopSortTests, ValidCertificateWithSeveralPredecessors)
+TEST(MSTTests, ValidCertificateWithSeveralPredecessors)
 {
     Graph g(7, true, false);
     g.addEdge({0, 1, 1});
