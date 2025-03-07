@@ -15,7 +15,7 @@ inline bool tinyMSTInstanceGenerator()
     std::string instancename;
 
     std::filesystem::create_directory("data/mst/tiny");
-    for (int i = 1; i < 10; ++i)
+    for (int i = 1; i < 2; ++i)
     {
         path.append("data/mst/tiny/TinyValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidMSTInstance(10, 40, 30, i);
@@ -37,7 +37,7 @@ inline bool smallMSTInstanceGenerator()
 
     std::filesystem::create_directory("data/mst/small");
 
-    for (int i = 1; i < 10; ++i)
+    for (int i = 1; i < 2; ++i)
     {
         path.append("data/mst/small/SmallValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidMSTInstance(100, 1000, 3000, i);
@@ -58,7 +58,7 @@ inline bool mediumMSTInstanceGenerator()
     std::string instancename;
 
     std::filesystem::create_directory("data/mst/medium");
-    for (int i = 1; i < 10; ++i)
+    for (int i = 1; i < 2; ++i)
     {
         path.append("data/mst/medium/MediumValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidMSTInstance(10000, 200000,300000, i);

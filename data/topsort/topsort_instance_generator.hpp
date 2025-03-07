@@ -14,7 +14,7 @@ inline bool tinyTopsortInstanceGenerator()
     std::string instancename;
 
     std::filesystem::create_directory("data/topsort/tiny");
-    for (int i = 1; i < 6; ++i)
+    for (int i = 1; i < 2; ++i)
     {
         path.append("data/topsort/tiny/TinyValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidTopSortInstance(10, 20, i);
@@ -45,7 +45,7 @@ inline bool smallTopsortInstanceGenerator()
 
     std::filesystem::create_directory("data/topsort/small");
 
-    for (int i = 1; i < 6; ++i)
+    for (int i = 1; i < 2; ++i)
     {
         path.append("data/topsort/small/SmallValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidTopSortInstance(100, 500, i);
@@ -75,7 +75,7 @@ inline bool mediumTopsortInstanceGenerator()
     std::string instancename;
 
     std::filesystem::create_directory("data/topsort/medium");
-    for (int i = 1; i < 6; ++i)
+    for (int i = 1; i < 2; ++i)
     {
         path.append("data/topsort/medium/MediumValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidTopSortInstance(10000, 100000, i);

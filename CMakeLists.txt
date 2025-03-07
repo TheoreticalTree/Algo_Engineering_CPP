@@ -4,6 +4,8 @@ project(Algo_Engineering_CPP)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 
+set(default_build_type "Release")
+
 # project
 add_subdirectory(src)
 
@@ -12,13 +14,42 @@ add_executable(main
         src/main.cpp
         src/topsort/topsort_checker.cpp
         src/topsort/basic_topsort.cpp
+        src/topsort/your_topsort.cpp
         src/graph.cpp
         src/mst/basic_mst.cpp
         src/mst/mst_checker.cpp
-        data/mst/mst_instance_generator.hpp
+        src/mst/your_mst.cpp
 )
 
 target_include_directories(main
+        PRIVATE
+        ${PROJECT_SOURCE_DIR}/include)
+
+# benchmark for top sort
+add_executable(benchmark_topsort
+        src/benchmark_topsort.cpp
+        src/topsort/topsort_checker.cpp
+        src/topsort/basic_topsort.cpp
+        src/topsort/your_topsort.cpp
+        src/graph.cpp
+        data/topsort/topsort_instance_generator.hpp
+)
+
+target_include_directories(benchmark_topsort
+        PRIVATE
+        ${PROJECT_SOURCE_DIR}/include)
+
+# benchmark for mst
+add_executable(benchmark_mst
+        src/benchmark_mst.cpp
+        src/graph.cpp
+        src/mst/basic_mst.cpp
+        src/mst/mst_checker.cpp
+        src/mst/your_mst.cpp
+        data/mst/mst_instance_generator.hpp
+)
+
+target_include_directories(benchmark_mst
         PRIVATE
         ${PROJECT_SOURCE_DIR}/include)
 

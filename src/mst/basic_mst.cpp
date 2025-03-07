@@ -19,30 +19,34 @@ void BasicMST::initialize()
     {
         sortedEdges_.push_back(currentEdge);
     }
-    std::sort(sortedEdges_.begin(), sortedEdges_.end(), firstEdgeWeightIsLargerThanSecond);
+    std::sort(sortedEdges_.begin(), sortedEdges_.end(), cmp);
 }
 
-bool BasicMST::firstEdgeWeightIsLargerThanSecond(edge& first, edge& second)
+bool BasicMST::cmp(edge& first, edge& second)
 {
-    if (first.weight>second.weight)
-    {
-        return true;
-    }else
-        return false;
+    return first.weight < second.weight;
 }
 
 
 node BasicMST::findRoot(node v)
 {
     node parent = v;
-    std::vector<node> ancestors = {v};
     while (parent!=parent_[parent])
     {
         parent = parent_[parent];
-        ancestors.push_back(parent);
     }
-    setParentToRoot(parent, ancestors);
-    return parent;
+
+    node root = parent;
+
+    parent = v;
+
+    while(parent != root) {
+        v = parent_[parent];
+        parent_[parent] = root;
+        parent = v;
+    }
+    
+    return root;
 }
 
 void BasicMST::setParentToRoot(node root, std::vector<node>& ancestors)
@@ -59,15 +63,13 @@ void BasicMST::run()
     node vRoot;
     node wRoot;
     //todo: alternatively just iterate through edges? would that be faster?
-    while (result_.size()<graph_.getNumberOfNodes()&&!sortedEdges_.empty())
+    for (const edge &currentEdge : sortedEdges_)
     {
-        currentEdge= sortedEdges_.back();
-        sortedEdges_.pop_back();
         vRoot = findRoot(parent_[currentEdge.v]);
         wRoot = findRoot(parent_[currentEdge.w]);
         if (vRoot!=wRoot)
         {
-            result_.push_back(currentEdge);
+            result_.emplace_back(currentEdge);
             mstValue_+=currentEdge.weight;
             if (sizeOfSubtree_[wRoot]>sizeOfSubtree_[vRoot])
             {

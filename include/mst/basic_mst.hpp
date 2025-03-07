@@ -36,7 +36,7 @@ private:
     std::vector<u_int32_t> sizeOfSubtree_;
     node findRoot(node v);
     void setParentToRoot(node root, std::vector<node>& ancestors);
-    static bool firstEdgeWeightIsLargerThanSecond(edge& first, edge& second);
+    static bool cmp(edge& first, edge& second);
 
     void initialize();
 };

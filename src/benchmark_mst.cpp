@@ -22,10 +22,10 @@ std::string runBenchmarkComparison(std::string file) {
 
   t_end = std::clock();
 
-  unsigned int time_ms = (t_end - t_start);
+  unsigned int time_ns = (t_end - t_start) * 1000000 / CLOCKS_PER_SEC;
 
 
-  return file + ", " + std::to_string(graph.getNumberOfNodes()) + ", " + std::to_string(graph.getNumberOfEdges()) + ", " + std::to_string(time_ms) + "\n";
+  return file + ", " + std::to_string(graph.getNumberOfNodes()) + ", " + std::to_string(graph.getNumberOfEdges()) + ", " + std::to_string(time_ns) + "\n";
 }
 
 std::string runBenchmarkYours(std::string file) {
@@ -40,10 +40,10 @@ std::string runBenchmarkYours(std::string file) {
 
   t_end = std::clock();
 
-  unsigned int time_ms = (t_end - t_start);
+  unsigned int time_ns = (t_end - t_start) * 1000000 / CLOCKS_PER_SEC;
 
 
-  return file + ", " + std::to_string(graph.getNumberOfNodes()) + ", " + std::to_string(graph.getNumberOfEdges()) + ", " + std::to_string(time_ms) + "\n";
+  return file + ", " + std::to_string(graph.getNumberOfNodes()) + ", " + std::to_string(graph.getNumberOfEdges()) + ", " + std::to_string(time_ns) + "\n";
 }
 
 int main(int argc, char** argv) {
@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
 
   
   for (auto file : instances) {
-    output += "Yours, " + runBenchmarkYours("data/topsort/" + file);
+    output += "Yours, " + runBenchmarkYours("data/mst/" + file);
   }
 
   std::cout << output;
