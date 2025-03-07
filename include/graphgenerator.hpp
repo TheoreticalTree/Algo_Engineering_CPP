@@ -11,7 +11,7 @@
 #include <vector>
 #include <algorithm>
 
-std::vector<edge> createValidTopSortInstance(int n, int targetEdgeNumber, int seed)
+inline std::vector<edge> createValidTopSortInstance(int n, int targetEdgeNumber, int seed)
 {
     uint64_t maxEdgeNumber = n * (n - 1) / 2;
     if (targetEdgeNumber > maxEdgeNumber)
@@ -27,13 +27,9 @@ std::vector<edge> createValidTopSortInstance(int n, int targetEdgeNumber, int se
     srand(seed);
     int i, j, temp;
     double random;
-    for (int k = 0; k < 2 * n; k++)
+    for (int v = n - 1; v > 0; v--)
     {
-        i = rand() % n;
-        j = rand() % n;
-        temp = nodes[i];
-        nodes[i] = nodes[j];
-        nodes[j] = temp;
+        std::swap(nodes[v], nodes[rand() % v]);
     }
     for (int i = 0; i < n - 1; i++)
     {
@@ -42,16 +38,16 @@ std::vector<edge> createValidTopSortInstance(int n, int targetEdgeNumber, int se
             random = rand() / double(RAND_MAX);
             if (random <= edgeRatio)
             {
-                edgelist.push_back(edge(nodes[i], nodes[j], 1));
+                edgelist.emplace_back(nodes[i], nodes[j], 1);
             }
         }
     }
     return edgelist;
 }
 
-std::vector<edge> createInvalidTopSortInstance(int n, int targetEdgeNumber, int seed)
+inline std::vector<edge> createInvalidTopSortInstance(int n, int targetEdgeNumber, int seed)
 {
-    uint64_t maxEdgeNumber = n * (n - 1) / 2;
+    uint64_t maxEdgeNumber = n * (n - 1);
     if (targetEdgeNumber > maxEdgeNumber)
     {
         throw std::runtime_error("Number of edges is too high. For n =" + std::to_string(n)
@@ -64,49 +60,37 @@ std::vector<edge> createInvalidTopSortInstance(int n, int targetEdgeNumber, int 
     srand(seed);
     int i, j, temp;
     double random;
-    for (int k = 0; k < 2 * n; k++)
+    for (int v = n - 1; v > 0; v--)
     {
-        i = rand() % n;
-        j = rand() % n;
-        temp = nodes[i];
-        nodes[i] = nodes[j];
-        nodes[j] = temp;
+        std::swap(nodes[v], nodes[rand() % v]);
     }
-    int circlesize = rand() % targetEdgeNumber;
-    std::vector<bool> isInCircle = std::vector<bool>(n);
-    i = rand() % n;
-    int start = i;
-    isInCircle[i] = true;
-    for (int k = 0; k < circlesize - 1; k++)
-    {
-        j = rand() % n;
-        if (!isInCircle[j])
-        {
-            edgelist.push_back(edge(nodes[i], nodes[j], 1));
-        }
-        i = j;
-    }
-    edgelist.push_back(edge(i, start, 1));
-
+    int circlesize = (rand() % (n / 2)) + 1;
     double edgeRatio = static_cast<double>(targetEdgeNumber - circlesize) / static_cast<double>(maxEdgeNumber);
-    for (int i = 0; i < n - 1; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
+
+    for (int v = 0; v < circlesize; v++) {
+        edgelist.emplace_back(nodes[v], nodes[v + 1], 1);
+    }
+
+    edgelist.emplace_back(nodes[circlesize], nodes[0]);
+
+    for (int v = 0; v < n; v++) {
+        for (int w = 0; w < n; w++) {
+            if ((v == w) || ((std::abs(v - w) == 1) && w <= circlesize))
+                continue;
+
+            
             random = rand() / double(RAND_MAX);
-            if (random <= edgeRatio && (
-                std::find(edgelist.begin(), edgelist.begin() + circlesize + 1, edge(nodes[i], nodes[j], 1)) == edgelist.
-                begin() + circlesize + 1) && (find(edgelist.begin(), edgelist.begin() + (circlesize + 1),
-                                                   edge(nodes[j], nodes[i], 1))) == edgelist.begin() + (circlesize + 1))
+            if (random <= edgeRatio)
             {
-                edgelist.push_back(edge(nodes[i], nodes[j], 1));
+                edgelist.push_back(edge(nodes[v], nodes[w], 1));
             }
         }
     }
+
     return edgelist;
 }
 
-std::vector<edge> createValidMSTInstance(int n, int targetEdgeNumber, double maximumWeight, int seed)
+inline std::vector<edge> createValidMSTInstance(int n, int targetEdgeNumber, double maximumWeight, int seed)
 {
     bool edgeIsDouble = true;
     int maxEdgeNumber = n * (n - 1) / 2;

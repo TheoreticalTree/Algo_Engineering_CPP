@@ -8,16 +8,16 @@
 #include <graphgenerator.hpp>
 #include <io.hpp>
 #include <filesystem>
-bool tinyMSTInstanceGenerator()
+inline bool tinyMSTInstanceGenerator()
 {
     std::string path;
     std::vector<edge> edgelist;
     std::string instancename;
 
-    std::filesystem::create_directory("../data/mst/tiny");
+    std::filesystem::create_directory("data/mst/tiny");
     for (int i = 1; i < 10; ++i)
     {
-        path.append("../data/mst/tiny/TinyValid").append(std::to_string(i)).append(".txt");
+        path.append("data/mst/tiny/TinyValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidMSTInstance(10, 40, 30, i);
         instancename = "TinyInstance";
         instancename.append(std::to_string(i));
@@ -29,17 +29,17 @@ bool tinyMSTInstanceGenerator()
     return true;
 }
 
-bool smallMSTInstanceGenerator()
+inline bool smallMSTInstanceGenerator()
 {
     std::string path;
     std::vector<edge> edgelist;
     std::string instancename;
 
-    std::filesystem::create_directory("../data/mst/small");
+    std::filesystem::create_directory("data/mst/small");
 
     for (int i = 1; i < 10; ++i)
     {
-        path.append("../data/mst/small/SmallValid").append(std::to_string(i)).append(".txt");
+        path.append("data/mst/small/SmallValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidMSTInstance(100, 1000, 3000, i);
         instancename = "SmallInstance";
         instancename.append(std::to_string(i));
@@ -51,16 +51,16 @@ bool smallMSTInstanceGenerator()
     return true;
 }
 
-bool mediumMSTInstanceGenerator()
+inline bool mediumMSTInstanceGenerator()
 {
     std::string path;
     std::vector<edge> edgelist;
     std::string instancename;
 
-    std::filesystem::create_directory("../data/mst/medium");
+    std::filesystem::create_directory("data/mst/medium");
     for (int i = 1; i < 10; ++i)
     {
-        path.append("../data/mst/medium/MediumValid").append(std::to_string(i)).append(".txt");
+        path.append("data/mst/medium/MediumValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidMSTInstance(10000, 200000,300000, i);
         instancename = "MediumInstance";
         instancename.append(std::to_string(i));
@@ -72,16 +72,16 @@ bool mediumMSTInstanceGenerator()
     return true;
 }
 
-bool largeMSTInstanceGenerator()
+inline bool largeMSTInstanceGenerator()
 {
     std::string path;
     std::vector<edge> edgelist;
     std::string instancename;
 
-    std::filesystem::create_directory("../data/mst/large");
-    for (int i = 1; i < 4; ++i)
+    std::filesystem::create_directory("data/mst/large");
+    for (int i = 1; i < 2; ++i)
     {
-        path.append("../data/mst/large/LargeValid").append(std::to_string(i)).append(".txt");
+        path.append("data/mst/large/LargeValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidMSTInstance(100000, 2000000, 3000000, i);
         instancename = "LargeInstance";
         instancename.append(std::to_string(i));
@@ -92,7 +92,7 @@ bool largeMSTInstanceGenerator()
     }
     return true;
 }
-bool mstInstanceGenerator()
+inline bool mstInstanceGenerator()
 {
     tinyMSTInstanceGenerator();
     smallMSTInstanceGenerator();

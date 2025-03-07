@@ -8,6 +8,8 @@
 
 #include <fstream>
 #include <vector>
+#include <iostream>
+
 #include "base.hpp"
 
 inline std::vector<std::string> split(const std::string& s, const std::string& delimiter)
@@ -57,6 +59,7 @@ inline std::vector<edge> readDimacsFormat(const std::string& path)
 inline bool writeEdgeListToDimacsFormat(const std::string& path, std::string instanceName, std::vector<edge>& edgelist)
 {
     std::ofstream outfile;
+    std::cout << "Writing to file " << path << std::endl;
     outfile.open(path, std::ios::trunc);
     outfile << instanceName <<"\n";
     for (edge currentEdge : edgelist)

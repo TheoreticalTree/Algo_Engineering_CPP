@@ -7,16 +7,16 @@
 #include <graphgenerator.hpp>
 #include <io.hpp>
 #include <filesystem>
-bool tinyTopsortInstanceGenerator()
+inline bool tinyTopsortInstanceGenerator()
 {
     std::string path;
     std::vector<edge> edgelist;
     std::string instancename;
 
-    std::filesystem::create_directory("../data/topsort/tiny");
+    std::filesystem::create_directory("data/topsort/tiny");
     for (int i = 1; i < 6; ++i)
     {
-        path.append("../data/topsort/tiny/TinyValid").append(std::to_string(i)).append(".txt");
+        path.append("data/topsort/tiny/TinyValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidTopSortInstance(10, 20, i);
         instancename = "TinyValidInstance";
         instancename.append(std::to_string(i));
@@ -25,7 +25,7 @@ bool tinyTopsortInstanceGenerator()
         edgelist.clear();
         instancename.clear();
 
-        path.append("../data/topsort/tiny/TinyInvalid").append(std::to_string(i)).append(".txt");
+        path.append("data/topsort/tiny/TinyInvalid").append(std::to_string(i)).append(".txt");
         edgelist = createInvalidTopSortInstance(10, 20, i);
         instancename = "TinyInvalidInstance";
         instancename.append(std::to_string(i));
@@ -37,17 +37,17 @@ bool tinyTopsortInstanceGenerator()
     return true;
 }
 
-bool smallTopsortInstanceGenerator()
+inline bool smallTopsortInstanceGenerator()
 {
     std::string path;
     std::vector<edge> edgelist;
     std::string instancename;
 
-    std::filesystem::create_directory("../data/topsort/small");
+    std::filesystem::create_directory("data/topsort/small");
 
     for (int i = 1; i < 6; ++i)
     {
-        path.append("../data/topsort/small/SmallValid").append(std::to_string(i)).append(".txt");
+        path.append("data/topsort/small/SmallValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidTopSortInstance(100, 500, i);
         instancename = "SmallValidInstance";
         instancename.append(std::to_string(i));
@@ -56,7 +56,7 @@ bool smallTopsortInstanceGenerator()
         edgelist.clear();
         instancename.clear();
 
-        path.append("../data/topsort/small/SmallInvalid").append(std::to_string(i)).append(".txt");
+        path.append("data/topsort/small/SmallInvalid").append(std::to_string(i)).append(".txt");
         edgelist = createInvalidTopSortInstance(100, 500, i);
         instancename = "SmallInvalidInstance";
         instancename.append(std::to_string(i));
@@ -68,16 +68,16 @@ bool smallTopsortInstanceGenerator()
     return true;
 }
 
-bool mediumTopsortInstanceGenerator()
+inline bool mediumTopsortInstanceGenerator()
 {
     std::string path;
     std::vector<edge> edgelist;
     std::string instancename;
 
-    std::filesystem::create_directory("../data/topsort/medium");
+    std::filesystem::create_directory("data/topsort/medium");
     for (int i = 1; i < 6; ++i)
     {
-        path.append("../data/topsort/medium/MediumValid").append(std::to_string(i)).append(".txt");
+        path.append("data/topsort/medium/MediumValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidTopSortInstance(10000, 100000, i);
         instancename = "MediumValidInstance";
         instancename.append(std::to_string(i));
@@ -86,7 +86,7 @@ bool mediumTopsortInstanceGenerator()
         edgelist.clear();
         instancename.clear();
 
-        path.append("../data/topsort/medium/MediumInvalid").append(std::to_string(i)).append(".txt");
+        path.append("data/topsort/medium/MediumInvalid").append(std::to_string(i)).append(".txt");
         edgelist = createInvalidTopSortInstance(10000, 100000, i);
         instancename = "MediumInvalidInstance";
         instancename.append(std::to_string(i));
@@ -98,16 +98,16 @@ bool mediumTopsortInstanceGenerator()
     return true;
 }
 
-bool largeTopsortInstanceGenerator()
+inline bool largeTopsortInstanceGenerator()
 {
     std::string path;
     std::vector<edge> edgelist;
     std::string instancename;
 
-    std::filesystem::create_directory("../data/topsort/large");
+    std::filesystem::create_directory("data/topsort/large");
     for (int i = 1; i < 2; ++i)
     {
-        path.append("../data/topsort/large/LargeValid").append(std::to_string(i)).append(".txt");
+        path.append("data/topsort/large/LargeValid").append(std::to_string(i)).append(".txt");
         edgelist = createValidTopSortInstance(100000, 1000000, i);
         instancename = "LargeValidInstance";
         instancename.append(std::to_string(i));
@@ -116,7 +116,7 @@ bool largeTopsortInstanceGenerator()
         edgelist.clear();
         instancename.clear();
 
-        path.append("../data/topsort/large/LargeInvalid").append(std::to_string(i)).append(".txt");
+        path.append("data/topsort/large/LargeInvalid").append(std::to_string(i)).append(".txt");
         edgelist = createInvalidTopSortInstance(50000, 500000, i);
         instancename = "LargeInvalidInstance";
         instancename.append(std::to_string(i));
@@ -127,12 +127,12 @@ bool largeTopsortInstanceGenerator()
     }
     return true;
 }
-bool topsortInstanceGenerator()
+inline bool topsortInstanceGenerator()
 {
     tinyTopsortInstanceGenerator();
     smallTopsortInstanceGenerator();
     mediumTopsortInstanceGenerator();
-   // largeTopsortInstanceGenerator();
+    largeTopsortInstanceGenerator();
     return true;
 }
 
