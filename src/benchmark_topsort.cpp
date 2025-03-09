@@ -25,7 +25,7 @@ std::string runBenchmarkComparison(std::string file) {
   unsigned int time_ns = (t_end - t_start) * 1000000 / CLOCKS_PER_SEC;
 
 
-  return file + ", " + std::to_string(graph.getNumberOfNodes()) + ", " + std::to_string(graph.getNumberOfEdges()) + ", " + std::to_string(time_ns) + "\n";
+  return file + "," + std::to_string(graph.getNumberOfNodes()) + "," + std::to_string(graph.getNumberOfEdges()) + "," + std::to_string(time_ns) + "\n";
 }
 
 std::string runBenchmarkYours(std::string file) {
@@ -43,21 +43,21 @@ std::string runBenchmarkYours(std::string file) {
   unsigned int time_ns = (t_end - t_start) * 1000000 / CLOCKS_PER_SEC;
 
 
-  return file + ", " + std::to_string(graph.getNumberOfNodes()) + ", " + std::to_string(graph.getNumberOfEdges()) + ", " + std::to_string(time_ns) + "\n";
+  return file + "," + std::to_string(graph.getNumberOfNodes()) + "," + std::to_string(graph.getNumberOfEdges()) + "," + std::to_string(time_ns) + "\n";
 }
 
 int main(int argc, char** argv) {
   std::vector<std::string> instances = {"tiny/TinyValid1.txt", "small/SmallValid1.txt", "medium/MediumValid1.txt", "large/LargeValid1.txt"};
 
-  std::string output = "Algorithm, Instance, N, M, runtime\n";
+  std::string output = "Algorithm,Instance,N,M,runtime\n";
 
   for (auto file : instances) {
-    output += "Comparison, " + runBenchmarkComparison("data/topsort/" + file);
+    output += "Comparison," + runBenchmarkComparison("data/topsort/" + file);
   }
 
   
   for (auto file : instances) {
-    output += "Yours, " + runBenchmarkYours("data/topsort/" + file);
+    output += "Yours," + runBenchmarkYours("data/topsort/" + file);
   }
 
   std::cout << output;
