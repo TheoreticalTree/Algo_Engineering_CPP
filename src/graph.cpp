@@ -106,9 +106,12 @@ void Graph::deleteEdge(node v, node w) {
                 backPosOut[v][i] = backPosOut[v].back();
                 backPosIn[edgesOut[v][i].w][backPosOut[v][i]] = i;
 
-                edgesIn[w][backPos] = edgesIn[w].back();
-                backPosIn[w][backPos] = backPosIn[w].back();
-                backPosOut[edgesIn[w][backPos].v][backPosIn[w][backPos]] = backPos;
+                if (backPos < edgesIn[w].size() - 1)
+                {
+                    edgesIn[w][backPos] = edgesIn[w].back();
+                    backPosIn[w][backPos] = backPosIn[w].back();
+                    backPosOut[edgesIn[w][backPos].v][backPosIn[w][backPos]] = backPos;
+                }
 
                 edgesOut[v].pop_back();
                 backPosOut[v].pop_back();
@@ -120,9 +123,12 @@ void Graph::deleteEdge(node v, node w) {
                 backPosOut[v][i] = backPosOut[v].back();
                 backPosOut[edgesOut[v][i].w][backPosOut[v][i]] = i;
 
-                edgesOut[w][backPos] = edgesOut[w].back();
-                backPosOut[w][backPos] = backPosOut[w].back();
-                backPosOut[edgesOut[w][backPos].w][backPosOut[w][backPos]] = backPos;
+                if (backPos < edgesOut[w].size() - 1)
+                {
+                    edgesOut[w][backPos] = edgesOut[w].back();
+                    backPosOut[w][backPos] = backPosOut[w].back();
+                    backPosOut[edgesOut[w][backPos].w][backPosOut[w][backPos]] = backPos;
+                }
 
                 edgesOut[v].pop_back();
                 backPosOut[v].pop_back();
