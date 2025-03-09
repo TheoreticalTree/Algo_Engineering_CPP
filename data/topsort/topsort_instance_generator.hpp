@@ -105,10 +105,10 @@ inline bool largeTopsortInstanceGenerator()
     std::string instancename;
 
     std::filesystem::create_directory("data/topsort/large");
-    for (int i = 1; i < 2; ++i)
+    for (int i = 1; i < 6; ++i)
     {
         path.append("data/topsort/large/LargeValid").append(std::to_string(i)).append(".txt");
-        edgelist = createValidTopSortInstance(100000, 1000000, i);
+        edgelist = createValidTopSortInstance(i * 20000, i * 200000, i);
         instancename = "LargeValidInstance";
         instancename.append(std::to_string(i));
         writeEdgeListToDimacsFormat( path, instancename, edgelist);
@@ -117,7 +117,7 @@ inline bool largeTopsortInstanceGenerator()
         instancename.clear();
 
         path.append("data/topsort/large/LargeInvalid").append(std::to_string(i)).append(".txt");
-        edgelist = createInvalidTopSortInstance(50000, 500000, i);
+        edgelist = createInvalidTopSortInstance(i * 20000, i * 200000, i);
         instancename = "LargeInvalidInstance";
         instancename.append(std::to_string(i));
         writeEdgeListToDimacsFormat( path, instancename, edgelist);

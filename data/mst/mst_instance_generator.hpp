@@ -18,7 +18,7 @@ inline bool tinyMSTInstanceGenerator()
     for (int i = 1; i < 2; ++i)
     {
         path.append("data/mst/tiny/TinyValid").append(std::to_string(i)).append(".txt");
-        edgelist = createValidMSTInstance(10, 40, 30, i);
+        edgelist = createValidMSTInstance(10, 40, 200, i);
         instancename = "TinyInstance";
         instancename.append(std::to_string(i));
         writeEdgeListToDimacsFormat( path, instancename, edgelist);
@@ -40,7 +40,7 @@ inline bool smallMSTInstanceGenerator()
     for (int i = 1; i < 2; ++i)
     {
         path.append("data/mst/small/SmallValid").append(std::to_string(i)).append(".txt");
-        edgelist = createValidMSTInstance(100, 1000, 3000, i);
+        edgelist = createValidMSTInstance(100, 1000, 200, i);
         instancename = "SmallInstance";
         instancename.append(std::to_string(i));
         writeEdgeListToDimacsFormat( path, instancename, edgelist);
@@ -61,7 +61,7 @@ inline bool mediumMSTInstanceGenerator()
     for (int i = 1; i < 2; ++i)
     {
         path.append("data/mst/medium/MediumValid").append(std::to_string(i)).append(".txt");
-        edgelist = createValidMSTInstance(10000, 200000,300000, i);
+        edgelist = createValidMSTInstance(10000, 200000,200, i);
         instancename = "MediumInstance";
         instancename.append(std::to_string(i));
         writeEdgeListToDimacsFormat( path, instancename, edgelist);
@@ -79,10 +79,10 @@ inline bool largeMSTInstanceGenerator()
     std::string instancename;
 
     std::filesystem::create_directory("data/mst/large");
-    for (int i = 1; i < 2; ++i)
+    for (int i = 1; i < 6; ++i)
     {
         path.append("data/mst/large/LargeValid").append(std::to_string(i)).append(".txt");
-        edgelist = createValidMSTInstance(100000, 2000000, 3000000, i);
+        edgelist = createValidMSTInstance(i * 20000, i * 400000, 200, i);
         instancename = "LargeInstance";
         instancename.append(std::to_string(i));
         writeEdgeListToDimacsFormat( path, instancename, edgelist);
