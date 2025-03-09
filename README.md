@@ -1,7 +1,23 @@
-# README for C++
+# README
 
 ## Build
 1) Clone the project
 2) run ```git submodule update --init --recursive```
+3) run ```cmake -B build``` and ```cmake --build build``` to build the instance generator, tests and benchmark skripts
 
-%TODO: Actually write the thing
+## Implement your own code
+1) Implement topsort code in ```src/your_topsort.cpp``` and mst code in ```src/your_mst.cpp```
+2) If you want to implement multiple algorithms solving the same problem, remember to add the files to ```CMakeLists.txt``` and to the benchmark code in ```src/benchmark_X.cpp```
+
+## Generate Instances
+**WARNING:** We assume that the base directory is the directory from which all code is xecuted. Many IDEs set the directory from which code is executed to *build* instead, which means the code doesn't find instance files where it expects them to be.
+1) Run ```./build/main``` to generate instances for Topological Sort and Minimum Spanning Tree (this may take a minute or two)
+
+## Run Tests
+**WARNING:** We assume that the base directory is the directory from which all code is xecuted. Many IDEs set the directory from which code is executed to *build* instead, which means the code doesn't find instance files where it expects them to be.
+1) Run ```./build/test/X``` where X is the appropriate test you want to run
+
+## Run Benchmarks
+**WARNING:** We assume that the base directory is the directory from which all code is xecuted. Many IDEs set the directory from which code is executed to *build* instead, which means the code doesn't find instance files where it expects them to be.
+1) Run ```./build/benchmark_X``` to run the benchmark for X
+2) Run ```python3 plot_X.py``` to plot the results of running X
