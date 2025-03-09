@@ -25,6 +25,22 @@ target_include_directories(main
         PRIVATE
         ${PROJECT_SOURCE_DIR}/include)
 
+# executable
+add_executable(generate_instances
+        src/generate_instances.cpp
+        src/topsort/topsort_checker.cpp
+        src/topsort/basic_topsort.cpp
+        src/topsort/your_topsort.cpp
+        src/graph.cpp
+        src/mst/basic_mst.cpp
+        src/mst/mst_checker.cpp
+        src/mst/your_mst.cpp
+)
+
+target_include_directories(main
+        PRIVATE
+        ${PROJECT_SOURCE_DIR}/include)
+
 # benchmark for top sort
 add_executable(benchmark_topsort
         src/benchmark_topsort.cpp
