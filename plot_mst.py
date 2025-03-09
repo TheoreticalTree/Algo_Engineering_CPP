@@ -23,7 +23,7 @@ for i, algorithm in enumerate(algorithms):
 
 # Labeling the axes
 plt.xlabel('N')
-plt.ylabel('runtime')
+plt.ylabel('runtime in ns')
 
 # Add a title
 plt.title('Runtime vs n for Different Algorithms')

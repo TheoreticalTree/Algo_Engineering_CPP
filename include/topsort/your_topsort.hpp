@@ -17,12 +17,26 @@ public:
       
     }
     void run() override;
+
+    /**
+     * Run the algorithm
+     * @return
+     */
     bool hasRun() const override{ return hasRun_;}
 
     std::map<std::string, std::variant<double, unsigned long>> getStats() const override;
 
-    //returns an empty vector if graph contains a cycle
+    /**
+     * This function should throw an exception if called before the algorithm is run
+     * @returna vector giving compressed topsort values for graph (starting at 1), empty vector if no topsort exists
+     */
     std::vector<node> getResult() const;
+
+    /**
+     *  Returns the smallest value k such that the instance has a compressed topsort with k steps
+     * This function shopuld throw an error if called before the algorithm is run
+     * @return The smallest possible k, -1 of none exists
+     */
     int getK() const;
 
 private:

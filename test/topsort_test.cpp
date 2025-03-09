@@ -15,10 +15,10 @@ TEST(TopSortTests, LineTest)
     Graph g(3, true, false);
     g.addEdge({2, 1});
     g.addEdge({1, 0});
-    YourTopsort basic_topsort = YourTopsort(g);
-    basic_topsort.run();
-    std::vector<node> result = basic_topsort.getResult();
-    EXPECT_EQ(basic_topsort.getK(),3);
+    YourTopsort your_topsort = YourTopsort(g);
+    your_topsort.run();
+    std::vector<node> result = your_topsort.getResult();
+    EXPECT_EQ(your_topsort.getK(),3);
     EXPECT_EQ(result[0], 3);
     EXPECT_EQ(result[1], 2);
     EXPECT_EQ(result[2], 1);
@@ -30,10 +30,10 @@ TEST(TopSortTests, CircleTest)
     g.addEdge({0, 1});
     g.addEdge({1, 2});
     g.addEdge({2,0});
-    YourTopsort basic_topsort = YourTopsort(g);
-    basic_topsort.run();
-    std::vector<node> result = basic_topsort.getResult();
-    EXPECT_EQ(basic_topsort.getK(),-1);
+    YourTopsort your_topsort = YourTopsort(g);
+    your_topsort.run();
+    std::vector<node> result = your_topsort.getResult();
+    EXPECT_EQ(your_topsort.getK(),-1);
     EXPECT_TRUE(result.empty());
 }
 
@@ -43,9 +43,9 @@ TEST(TopSortTests, NoRunYet)
     g.addEdge({0, 1});
     g.addEdge({1, 2});
     g.addEdge({2,0});
-    YourTopsort basic_topsort = YourTopsort(g);
-    EXPECT_THROW(basic_topsort.getResult(),std::runtime_error);
-    EXPECT_THROW(basic_topsort.getK(), std::runtime_error);
+    YourTopsort your_topsort = YourTopsort(g);
+    EXPECT_THROW(your_topsort.getResult(),std::runtime_error);
+    EXPECT_THROW(your_topsort.getK(), std::runtime_error);
 }
 TEST(TopSortTests, SeveralPredecessors)
 {
@@ -62,10 +62,10 @@ TEST(TopSortTests, SeveralPredecessors)
     g.addEdge({3,6});
     g.addEdge({5,6});
     g.addEdge({6,4});
-    YourTopsort basic_topsort = YourTopsort(g);
-    basic_topsort.run();
-    std::vector<node> result = basic_topsort.getResult();
-    EXPECT_EQ(basic_topsort.getK(), 6);
+    YourTopsort your_topsort = YourTopsort(g);
+    your_topsort.run();
+    std::vector<node> result = your_topsort.getResult();
+    EXPECT_EQ(your_topsort.getK(), 6);
     EXPECT_EQ(result[0],1);
     EXPECT_EQ(result[1],2);
     EXPECT_EQ(result[2],3);
