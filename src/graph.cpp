@@ -134,7 +134,7 @@ void Graph::deleteEdge(node v, node w) {
         }
     }
 
-    throw std::runtime_error("You tried to delete an edge that does not exist");
+    throw std::runtime_error("Tried to delete an edge that does not exist");
 }
 
 bool Graph::hasEdge(node v, node w) const {
@@ -182,15 +182,16 @@ node Graph::addVertex() {
 }
 
 void Graph::deleteVertex(node v) {
-    // TODO: Implement efficient vertex deletion (more efficient than just calling deleteEgde a bunch of times)
+    if (!alive[v])
+        throw std::runtime_error("Tried to delete vertex that does not exist");
 
     while (!edgesOut[v].empty()) {
-        deleteEdge(v, edgesOut[v].back().w);
+        deleteEdge(v, edgesOut[v].front().w);
     }
 
     if (directed) {
         while (!edgesIn[v].empty()) {
-            deleteEdge(edgesIn[v].back().v, v);
+            deleteEdge(edgesIn[v].front().v, v);
         }
     }
 
