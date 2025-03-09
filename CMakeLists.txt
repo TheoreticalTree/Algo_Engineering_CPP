@@ -37,7 +37,7 @@ add_executable(generate_instances
         src/mst/your_mst.cpp
 )
 
-target_include_directories(main
+target_include_directories(generate_instances
         PRIVATE
         ${PROJECT_SOURCE_DIR}/include)
 
