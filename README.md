@@ -21,4 +21,4 @@
 ## Run Benchmarks
 **WARNING:** We assume that the base directory is the directory from which all code is executed. Many IDEs set the directory from which code is executed to *build* instead, which means the code doesn't find instance files where it expects them to be.
 1) Run ```./build/benchmark_X``` to run the benchmark for X
-2) Run ```python3 plot_X.py``` to plot the results of running X
+2) Run ```python3 plot_X.py``` to plot the results of running X.

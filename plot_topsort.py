@@ -34,3 +34,4 @@ plt.legend(title='Algorithm')
 # Show the plot
 plt.grid(True)
 plt.savefig('plot_topsort.png')
+plt.show()
