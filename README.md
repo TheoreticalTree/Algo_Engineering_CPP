@@ -3,7 +3,7 @@
 ## Build
 1) Clone the project
 2) run ```git submodule update --init --recursive```
-3) run ```cmake -B build``` and ```cmake --build build``` to build the instance generator, tests and benchmark skripts
+3) run ```cmake -B build``` (if you are using windows and it doesn't work, try ```cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -B build -G "MinGW Makefiles"```, which may work better) and ```cmake --build build``` to build the instance generator, tests and benchmark skripts
 
 ## Implement your own code
 1) Implement topsort code in ```src/your_topsort.cpp``` and mst code in ```src/your_mst.cpp```. The respective headers for the classes are ```include/your_topsort.hpp``` and ```include/your_mst.hpp```
