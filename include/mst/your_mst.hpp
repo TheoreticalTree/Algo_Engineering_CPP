@@ -20,8 +20,11 @@ public:
 
     std::map<std::string, std::variant<double, unsigned long>> getStats() const override;
 
-    //returns an empty vector if graph contains a cycle
+    /**
+     * @return a vector of the edges forming a minimum spanning tree
+     */
     std::vector<edge> getResult() const;
+
     double getMSTValue() const;
 
 private:
