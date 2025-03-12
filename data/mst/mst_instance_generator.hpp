@@ -92,12 +92,103 @@ inline bool largeMSTInstanceGenerator()
     }
     return true;
 }
+
+inline bool tinyIntegerMSTInstanceGenerator()
+{
+    std::string path;
+    std::vector<edge> edgelist;
+    std::string instancename;
+
+    std::filesystem::create_directory("data/mst/tiny");
+    for (int i = 1; i < 2; ++i)
+    {
+        path.append("data/mst/tiny/TinyValid").append(std::to_string(i)).append(".txt");
+        edgelist = createValidMSTInstanceWithIntegerWeights(10, 40, 30, i);
+        instancename = "TinyInstance";
+        instancename.append(std::to_string(i));
+        writeEdgeListToDimacsFormat( path, instancename, edgelist);
+        path.clear();
+        edgelist.clear();
+        instancename.clear();
+    }
+    return true;
+}
+
+inline bool smallIntegerMSTInstanceGenerator()
+{
+    std::string path;
+    std::vector<edge> edgelist;
+    std::string instancename;
+
+    std::filesystem::create_directory("data/mst/small");
+
+    for (int i = 1; i < 2; ++i)
+    {
+        path.append("data/mst/small/SmallValid").append(std::to_string(i)).append(".txt");
+        edgelist = createValidMSTInstanceWithIntegerWeights(100, 1000, 30, i);
+        instancename = "SmallInstance";
+        instancename.append(std::to_string(i));
+        writeEdgeListToDimacsFormat( path, instancename, edgelist);
+        path.clear();
+        edgelist.clear();
+        instancename.clear();
+    }
+    return true;
+}
+
+inline bool mediumIntegerMSTInstanceGenerator()
+{
+    std::string path;
+    std::vector<edge> edgelist;
+    std::string instancename;
+
+    std::filesystem::create_directory("data/mst/medium");
+    for (int i = 1; i < 2; ++i)
+    {
+        path.append("data/mst/medium/MediumValid").append(std::to_string(i)).append(".txt");
+        edgelist = createValidMSTInstanceWithIntegerWeights(10000, 200000,30, i);
+        instancename = "MediumInstance";
+        instancename.append(std::to_string(i));
+        writeEdgeListToDimacsFormat( path, instancename, edgelist);
+        path.clear();
+        edgelist.clear();
+        instancename.clear();
+    }
+    return true;
+}
+
+inline bool largeIntegerMSTInstanceGenerator()
+{
+    std::string path;
+    std::vector<edge> edgelist;
+    std::string instancename;
+
+    std::filesystem::create_directory("data/mst/large");
+    for (int i = 1; i < 6; ++i)
+    {
+        path.append("data/mst/large/LargeValid").append(std::to_string(i)).append(".txt");
+        edgelist = createValidMSTInstanceWithIntegerWeights(i * 20000, i * 400000, 30, i);
+        instancename = "LargeInstance";
+        instancename.append(std::to_string(i));
+        writeEdgeListToDimacsFormat( path, instancename, edgelist);
+        path.clear();
+        edgelist.clear();
+        instancename.clear();
+    }
+    return true;
+}
+
 inline bool mstInstanceGenerator()
 {
-    tinyMSTInstanceGenerator();
-    smallMSTInstanceGenerator();
-    mediumMSTInstanceGenerator();
-    largeMSTInstanceGenerator();
+    // tinyMSTInstanceGenerator();
+    // smallMSTInstanceGenerator();
+    // mediumMSTInstanceGenerator();
+    // largeMSTInstanceGenerator();
+
+    tinyIntegerMSTInstanceGenerator();
+    smallIntegerMSTInstanceGenerator();
+    mediumIntegerMSTInstanceGenerator();
+    largeIntegerMSTInstanceGenerator();
     return true;
 }
 

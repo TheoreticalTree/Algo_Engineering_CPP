@@ -6,6 +6,6 @@
 #include "../data/mst/mst_instance_generator.hpp"
 
 int main(int argc, char** argv) {
-    topsortInstanceGenerator();
+    //topsortInstanceGenerator();
     mstInstanceGenerator();
 }

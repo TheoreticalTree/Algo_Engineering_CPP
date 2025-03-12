@@ -11,7 +11,7 @@ void BasicMST::initialize()
 {
     mstValue_ = 0;
     result_ = std::vector<edge>(0);
-    sizeOfSubtree_ = std::vector<u_int32_t>(graph_.getNumberOfNodes(),1);
+    sizeOfSubtree_ = std::vector<uint32_t>(graph_.getNumberOfNodes(),1);
     parent_ =std::vector<node>(graph_.getNumberOfNodes());
     std::iota(parent_.begin(),parent_.end(),0);
     sortedEdges_ = std::vector<edge>();
