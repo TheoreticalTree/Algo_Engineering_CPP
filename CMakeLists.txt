@@ -19,6 +19,7 @@ add_executable(main
         src/mst/basic_mst.cpp
         src/mst/mst_checker.cpp
         src/mst/your_mst.cpp
+        src/maxcut/basic_maxcut.cpp
 )
 
 target_include_directories(main
@@ -66,6 +67,18 @@ add_executable(benchmark_mst
 )
 
 target_include_directories(benchmark_mst
+        PRIVATE
+        ${PROJECT_SOURCE_DIR}/include)
+
+# benchmark for mst
+add_executable(benchmark_maxcut
+        src/benchmark_maxcut.cpp
+        src/graph.cpp
+        src/maxcut/basic_maxcut.cpp
+        src/maxcut/your_maxcut.cpp
+)
+
+target_include_directories(benchmark_maxcut
         PRIVATE
         ${PROJECT_SOURCE_DIR}/include)
 

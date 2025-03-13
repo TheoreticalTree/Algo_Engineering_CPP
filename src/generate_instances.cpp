@@ -4,8 +4,10 @@
 
 #include "../data/topsort/topsort_instance_generator.hpp"
 #include "../data/mst/mst_instance_generator.hpp"
+#include "../data/maxcut/maxcut_instance_generator.hpp"
 
 int main(int argc, char** argv) {
     topsortInstanceGenerator();
     mstInstanceGenerator();
+    maxcutInstanceGenerator();
 }

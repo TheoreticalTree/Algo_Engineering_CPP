@@ -180,4 +180,36 @@ inline std::vector<edge> createValidMSTInstance(uint64_t n, int targetEdgeNumber
     return edgelist;
 }
 
+inline std::vector<edge> createMaxCutInstance(uint64_t n, int targetEdgeNumber, double maximumWeight, int seed)
+{
+    uint64_t maxEdgeNumber = n * (n - 1) / 2;
+    if (targetEdgeNumber > maxEdgeNumber || targetEdgeNumber < n - 1)
+    {
+        throw std::runtime_error(
+            "Number of edges is wrong. For n = " + std::to_string(n) + " select at least " + std::to_string(n - 1) +
+            " and at most " + std::to_string(maxEdgeNumber) + " edges!\n");
+    }
+
+    double edgeRatio = static_cast<double>(targetEdgeNumber) / static_cast<double>(maxEdgeNumber);
+   
+    
+    std::vector<edge> edgelist;
+    std::mt19937 gen(seed);
+    std::uniform_real_distribution<> randomWeight(0.0, maximumWeight);;
+    double random;
+
+    for (int v = 0; v < n; v++) {
+        for (int w = v + 1; w < n; w++) {
+            
+            random = rand() / double(RAND_MAX);
+            if (random <= edgeRatio)
+            {
+                edgelist.push_back(edge(v, w, randomWeight(gen)));
+            }
+        }
+    }
+
+    return edgelist;
+}
+
 #endif //GRAPHGENERATOR_HPP

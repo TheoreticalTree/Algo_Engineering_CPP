@@ -36,3 +36,10 @@ package_add_test(mst mst_test.cpp
         ../src/mst/your_mst.cpp
         ../src/mst/mst_checker.cpp
 )
+
+package_add_test(maxcut maxcut_test.cpp
+        ../src/graph.cpp
+        ../include/abstract_algorithm.hpp
+        ../src/maxcut/basic_maxcut.cpp
+        ../src/maxcut/your_maxcut.cpp
+)
