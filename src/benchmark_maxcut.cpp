@@ -48,24 +48,28 @@ std::string runBenchmarkYours(std::string file) {
 int main(int argc, char** argv) {
   std::vector<std::string> instances = {"tiny/TinyValid1.txt", "small/SmallValid1.txt", "medium/MediumValid1.txt", "large/LargeValid1.txt", "large/LargeValid2.txt", "large/LargeValid3.txt", "large/LargeValid4.txt", "large/LargeValid5.txt"};
 
-  std::string output = "Algorithm,Instance,N,M,runtime\n";
+  std::string output = "Algorithm,Instance,N,M,runtime,quality\n";
 
   for (auto file : instances) {
-    output += "Comparison," + runBenchmarkComparison("data/maxcut/" + file, 0);
+    output += "Comparison[0]," + runBenchmarkComparison("data/maxcut/" + file, 0);
   }
 
   for (auto file : instances) {
-    output += "Comparison," + runBenchmarkComparison("data/maxcut/" + file, 10);
+    output += "Comparison[1]," + runBenchmarkComparison("data/maxcut/" + file, 1);
+  }
+
+  for (auto file : instances) {
+    output += "Comparison[10]," + runBenchmarkComparison("data/maxcut/" + file, 10);
   }
 
   
   for (auto file : instances) {
-    output += "Yours," + runBenchmarkYours("data/maxcut/" + file);
+    //output += "Yours," + runBenchmarkYours("data/maxcut/" + file);
   }
 
   std::cout << output;
 
-  std::ofstream file("output_mst.csv");
+  std::ofstream file("output_maxcut.csv");
 
   file << output;
 
