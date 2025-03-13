@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 
   
   for (auto file : instances) {
-    //output += "Yours," + runBenchmarkYours("data/maxcut/" + file);
+    output += "Yours," + runBenchmarkYours("data/maxcut/" + file);
   }
 
   std::cout << output;
