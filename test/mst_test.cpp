@@ -19,12 +19,15 @@ TEST(MSTTests, LineTest)
     Graph g(3, false, true);
     g.addEdge({2, 1, 2});
     g.addEdge({1, 0, 1});
-    YourMST basic_mst(g);
+    BasicMST basic_mst(g);
     basic_mst.run();
     EXPECT_EQ(basic_mst.getMSTValue(), 3);
     std::vector<edge> result = basic_mst.getResult();
-    EXPECT_EQ(result[0].weight, 1);
-    EXPECT_EQ(result[1].weight, 2);
+
+    std::sort(result.begin(), result.end(), [](edge e1, edge e2){return e1.weight < e2.weight;});
+
+    EXPECT_TRUE(result[0] == edge(1, 0, 1.0) || result[0] == edge(0, 1, 1.0));
+    EXPECT_TRUE(result[1] == edge(2, 1, 2.0) || result[1] == edge(1, 2, 2.0));
 }
 
 TEST(MSTTests, CircleTest)
@@ -71,12 +74,12 @@ TEST(MSTTests, SeveralPredecessors)
     basic_mst.run();
     EXPECT_EQ(basic_mst.getMSTValue(), 10);
     std::vector<edge> result = basic_mst.getResult();
-    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({0,1,1})) != result.end());
-    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({0,2,2})) != result.end());
-    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({1,5,1})) != result.end());
-    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({2,3,1})) != result.end());
-    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({2,4,2})) != result.end());
-    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({5,6,3})) != result.end());
+    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({0,1,1})) != result.end() || std::find(result.begin(), result.end(), edge({1,0,1})) != result.end());
+    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({0,2,2})) != result.end() || std::find(result.begin(), result.end(), edge({2,0,2})) != result.end());
+    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({1,5,1})) != result.end() || std::find(result.begin(), result.end(), edge({5,1,1})) != result.end());
+    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({2,3,1})) != result.end() || std::find(result.begin(), result.end(), edge({3,2,1})) != result.end());
+    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({2,4,2})) != result.end() || std::find(result.begin(), result.end(), edge({4,2,2})) != result.end());
+    EXPECT_TRUE(std::find(result.begin(), result.end(), edge({5,6,3})) != result.end() || std::find(result.begin(), result.end(), edge({6,5,3})) != result.end());
 }
 
 

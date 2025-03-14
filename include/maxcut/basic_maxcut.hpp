@@ -11,7 +11,7 @@
 
 class BasicMaxCut : public AbstractAlgorithm{
 public:
-    explicit BasicMaxCut(Graph& g, unsigned int numLocalSearchRounds): AbstractAlgorithm(g), numLocalSearchRounds_(numLocalSearchRounds)
+    explicit BasicMaxCut(Graph& g, unsigned int numLocalSearchRounds = 0): AbstractAlgorithm(g), numLocalSearchRounds_(numLocalSearchRounds)
     {
     }
     void run() override;
