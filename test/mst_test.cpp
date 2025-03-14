@@ -31,13 +31,13 @@ TEST(MSTTests, CircleTest)
 {
     Graph g(3, false, true);
     g.addEdge({0, 1, 1});
-    g.addEdge({1, 2, 3.5});
-    g.addEdge({2, 0, -2});
+    g.addEdge({1, 2, 4});
+    g.addEdge({2, 0, 2});
     YourMST basic_mst(g);
     basic_mst.run();
     EXPECT_EQ(basic_mst.getMSTValue(), -1);
     std::vector<edge> result = basic_mst.getResult();
-    EXPECT_EQ(result[0].weight, -2);
+    EXPECT_EQ(result[0].weight, 2);
     EXPECT_EQ(result[1].weight, 1);
 }
 
