@@ -10,18 +10,18 @@
 #include "../data/maxcut/maxcut_instance_generator.hpp"
 
 int main(int argc, char** argv) {
-    if (argc == 1) {
-        if (std::strcmp(argv[0], "topsort") == 0) {
+    if (argc >= 2) {
+        if (std::strcmp(argv[1], "topsort") == 0) {
             topsortInstanceGenerator();
         }
-        else if (std::strcmp(argv[0], "mst") == 0) {
+        else if (std::strcmp(argv[1], "mst") == 0) {
             mstInstanceGenerator();
         }
-        else if (std::strcmp(argv[0], "maxcut") == 0) {
+        else if (std::strcmp(argv[1], "maxcut") == 0) {
             maxcutInstanceGenerator();
         }
         else {
-            std::cout << "Please call with either topsort, mst or maxcut as an arg or no arg at all" << std::endl;
+            std::cout << "Does not recognize argument" << argv[0] << ", please call with either topsort, mst or maxcut as an arg or no arg at all" << std::endl;
         }
     }
     else {

@@ -195,7 +195,7 @@ inline std::vector<edge> createMaxCutInstance(uint64_t n, int targetEdgeNumber, 
     
     std::vector<edge> edgelist;
     std::mt19937 gen(seed);
-    std::uniform_real_distribution<> randomWeight(0.0, maximumWeight);;
+    std::uniform_real_distribution<> randomWeight(-maximumWeight, maximumWeight);;
     double random;
 
     for (int v = 0; v < n; v++) {
